@@ -1,0 +1,18 @@
+1. Only females
+2. Seniles - too old to reproduce
+   Adults - reproducing
+   Juveniles - too young to reproduce
+3. End of generation:
+   all surviving seniles remain as seniles
+   all surviving adults change into seniles
+   all surviving juveniles change into adults
+4. Survival rate = 0 -> no individuals survive to next gen
+   Survival rate = 1 -> all individuals survive to next gen
+   Survival rate = 0.25 -> quarter survive to next gen
+
+   new num = current num * survival rate
+5. Birthrate is on average
+
+   new num of juveniles = current adults * birthrate
+6. Number of individuals measured in thousands
+7. EVERYTHING NEEDS TO BE SET BEFORE RUN
