@@ -37,7 +37,7 @@ def set_values():
                     if "birthrate" not in prompt:
                         if val > 1 or val < 0:
                             print("\tInvalid value, please try again")
-                        elif 1 > val > 0:
+                        elif 1 >= val >= 0:
                             return val
                     elif "birthrate" in prompt: return val
 
@@ -54,30 +54,32 @@ def set_values():
     with open("set_values.txt", "w") as f:
         f.write(f"{juvenilePopulation}\n{juvenileSurvivalRate}\n{adultPopulation}\n{adultSurvivalRate}\n{senilePopulation}\n{senileSurvivalRate}\n{birthRate}\n{newGens}")
 
+    return juvenilePopulation, juvenileSurvivalRate, adultPopulation, adultSurvivalRate, senilePopulation, senileSurvivalRate, birthRate, newGens
+
 
 def display_values():
     with open("set_values.txt", "r") as f:
         for i, line in enumerate(f):
-            if i == 0:
-                print(f"Juvenile Population: {line}")
-            elif i == 1:
-                print(f"Juvenile Survival Rate: {line}")
-            elif i == 2:
-                print(f"Adult Population: {line}")
-            elif i == 3:
-                print(f"Adult Survival Rate: {line}")
-            elif i == 4:
-                print(f"Senile Population: {line}")
-            elif i == 5:
-                print(f"Senile Survival Rate: {line}")
-            elif i == 6:
-                print(f"Birth rate: {line}")
-            elif i == 7:
-                print(f"New Generations: {line}")
+            if i == 0: print(f"Juvenile Population: {line}")
+            elif i == 1: print(f"Juvenile Survival Rate: {line}")
+            elif i == 2: print(f"Adult Population: {line}")
+            elif i == 3: print(f"Adult Survival Rate: {line}")
+            elif i == 4: print(f"Senile Population: {line}")
+            elif i == 5: print(f"Senile Survival Rate: {line}")
+            elif i == 6: print(f"Birth rate: {line}")
+            elif i == 7: print(f"New Generations: {line}")
 
 
-def run_model():
-    print("")
+def run_model(juvenilePopulation, juvenileSurvivalRate, adultPopulation, adultSurvivalRate, senilePopulation, senileSurvivalRate, birthRate, newGens):
+    currentGen = 1
+    while currentGen != newGens:
+        print(f"Generation {currentGen}:\n")
+        print(f"Juvenile Population: {adultPopulation * birthRate}")
+        print(f"Adult Population: {adultPopulation}")
+        print(f"Senile Population: {senilePopulation}")
+        adultPopulation = juvenilePopulation * juvenileSurvivalRate
+        senilePopulation = (senilePopulation * senileSurvivalRate) + (adultPopulation * adultSurvivalRate)
+
 
 
 loopCtrl = 1
@@ -85,11 +87,11 @@ while loopCtrl == 1:
     loopCtrl = 2
     menuChoice = main_menu()
     if menuChoice == 1:
-        set_values()
+        jupop, jusur, adpop, adsur, senpop, sensur, brate, newGens = set_values()
         loopCtrl = 1
     elif menuChoice == 2:
         display_values()
         loopCtrl = 1
     elif menuChoice == 3:
-        run_model()
+        run_model(jupop, jusur, adpop, adsur, senpop, sensur, brate, newGens) #! "jupop is not defined"? check celebrity dogs program
         loopCtrl = 1
