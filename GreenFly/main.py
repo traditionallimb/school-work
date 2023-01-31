@@ -70,15 +70,23 @@ def display_values():
             elif i == 7: print(f"New Generations: {line}")
 
 
-def run_model(juvenilePopulation, juvenileSurvivalRate, adultPopulation, adultSurvivalRate, senilePopulation, senileSurvivalRate, birthRate, newGens):
-    currentGen = 1
-    while currentGen != newGens:
+def run_model():
+    workingValues = []
+    with open("set_values.txt", "r") as f:
+      workingValues = [line.strip("\n") for line in f]
+    print(workingValues)
+    currentGen = 0
+    while currentGen != workingValues[7]:
         print(f"Generation {currentGen}:\n")
-        print(f"Juvenile Population: {adultPopulation * birthRate}")
-        print(f"Adult Population: {adultPopulation}")
-        print(f"Senile Population: {senilePopulation}")
+        print(f"Juvenile Population: {workingValues[0]}")
+        print(f"Adult Population: {workingValues[2]}")
+        print(f"Senile Population: {workingValues[4]}\n\n")
+        workingValues.pop(0)
+        workingValues.insert(0, (workingValues))
+        workingValues[1] = workingValues[]
         adultPopulation = juvenilePopulation * juvenileSurvivalRate
         senilePopulation = (senilePopulation * senileSurvivalRate) + (adultPopulation * adultSurvivalRate)
+        currentGen += 1
 
 
 
@@ -93,5 +101,5 @@ while loopCtrl == 1:
         display_values()
         loopCtrl = 1
     elif menuChoice == 3:
-        run_model(jupop, jusur, adpop, adsur, senpop, sensur, brate, newGens) #! "jupop is not defined"? check celebrity dogs program
+        run_model() #! "jupop is not defined"? check celebrity dogs program
         loopCtrl = 1
